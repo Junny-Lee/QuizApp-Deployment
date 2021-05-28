@@ -1,0 +1,263 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+#navbar{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 3%;
+
+    h5{
+        color: white;
+        padding-right: 5%;
+    }
+}
+
+.header {
+    text-align: center;
+    color: white;
+
+    h2{
+        animation: color-change 5s infinite;
+        font-family: Marker Felt;
+        margin-top: 2%;
+        font-size: 450%;
+    }
+
+    @keyframes color-change {
+        0% { color: blueviolet; }
+        50% { color: red; }
+        100% { color: blueviolet; }
+    }
+}
+
+#subheader {
+    color: white;
+    font-family: Marker Felt;
+    margin-left: 7%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 1%;
+
+    .btn.btn-lg.btn-primary{
+        background-color: #141a20;
+        padding: 3%;
+        min-width: 23%;
+        margin: 2%;
+        transition-duration: 0.4s;
+        font-family: Marker Felt;
+        font-weight:bolder;
+        color: white;
+        font-size: 180%;
+    }
+
+    .btn.btn-lg.btn-primary:hover{
+        background-color: #182c83;
+        outline: dotted 0.1rem #182c83;
+        border-radius: 4%;
+    }
+}
+
+#startButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 4.3%;
+
+    .btn.btn-lg.btn-light{
+        padding: 2% 1.6% 1.6% 1.6%;
+        min-width: 14%;
+        margin: 2%;
+        transition-duration: 0.4s;
+        font-family: Marker Felt;
+        font-size:300%;
+    }
+
+    button{
+        color: white;
+        font-size: 290%;
+        animation: flash-color 0.8s infinite;
+    }
+    @keyframes flash-color{
+        0% { background-color: #fdb021; }
+        50% { background-color: red; }
+        100% { background-color: #fdb021; }
+    }
+    // add arrows that appear when hovered
+    button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.3s;
+    }
+    button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
+    button:hover span {
+        padding-right: 25px;
+    }
+    button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+}
+
+// *********************** stars background
+
+@mixin translate50
+{
+-webkit-transform: translate(-50, -50%);
+-ms-transform: translate(-50, -50%);
+-o-transform: translate(-50, -50%);
+transform: translate(-50, -50%);
+}
+
+@mixin roundedCorners
+{
+-webkit-border-radius: 50%; 
+-moz-border-radius: 50%; 
+border-radius: 50%;
+}
+
+@mixin rotateBase
+{
+-webkit-transform: rotate3d(-1, 1, 0, 0deg);
+-ms-transform: rotate3d(-1, 1, 0, 0deg);
+-o-transform: rotate3d(-1, 1, 0, 0deg);
+transform: rotate3d(-1, 1, 0, 0deg);
+}
+
+@mixin rotateRight
+{
+-webkit-transform: rotate3d(-1, 1, 0, 30deg);
+-ms-transform: rotate3d(-1, 1, 0, 30deg);
+-o-transform: rotate3d(-1, 1, 0, 30deg);
+transform: rotate3d(-1, 1, 0, 30deg);
+}
+
+@mixin rotateLeft
+{
+-webkit-transform: rotate3d(-1, 1, 0, -30deg);
+-ms-transform: rotate3d(-1, 1, 0, -30deg);
+-o-transform: rotate3d(-1, 1, 0, -30deg);
+transform: rotate3d(-1, 1, 0, -30deg);
+}
+
+// n is number of stars generated
+@function generateStars ($n)
+{ 
+$value: '#{0} #{random(2000)}px #{random(2000)}px #FFF';
+
+@for $i from 2 through $n
+{
+    $value: '#{$value} , #{random(7000)}px #{random(7000)}px #FFF';
+}
+
+@return unquote($value);
+}
+
+$stars-small:  generateStars(7000);
+$stars-medium: generateStars(2000);
+$stars-big:    generateStars(1000);
+
+body
+{
+overflow: auto;
+}
+
+#stars-container-main
+{
+height: 120vh;
+width: 300%;
+width: 100%;
+background: radial-gradient(ellipse at bottom, #1B2735 0%, #191F24 100%);
+overflow: auto;
+@include translate50;
+}
+
+#stars
+{
+width: 1px;
+height: 1px;
+background: transparent;
+box-shadow: $stars-small;
+animation : animateStars 28.5s ease-in-out infinite;
+@include roundedCorners;
+
+&::after
+{
+    content: " ";
+    position: absolute;
+    margin: auto;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: $stars-small;
+    @include roundedCorners;
+}
+}
+    
+#stars2
+{
+width: 2px;
+height: 2px;
+background: transparent;
+box-shadow: $stars-medium;
+animation : animateStars 30s ease-in-out infinite;
+@include roundedCorners;
+    
+&::after
+{
+    content: " ";
+    position: absolute;
+    margin: auto;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: $stars-medium;
+    @include roundedCorners;
+}
+}
+    
+#stars3
+{
+width: 3px;
+height: 3px;
+background: transparent;
+box-shadow: $stars-big;
+animation : animateStars 31.5s ease-in-out infinite;
+@include roundedCorners;
+    
+&:after
+{
+    content: " ";
+    position: absolute;
+    margin: auto;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow: $stars-big;
+    @include roundedCorners;
+}
+}
+
+@keyframes animateStars
+{
+0%{@include rotateBase;}
+25%{@include rotateRight;}
+50%{@include rotateBase;}
+75%{@include rotateLeft;}
+100%{@include rotateBase;}
+}
